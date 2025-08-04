@@ -19,7 +19,9 @@ function Question() {
     questionNumber,
     setQuestion,
     answeredQuestions,
+    submitted,
     setAnswer,
+    setSubmitted,
   } = useQuestionContext();
 
   const section = sections[sectionNumber];
@@ -31,10 +33,22 @@ function Question() {
     const isLastQuestion = questionNumber === totalQuestions - 1;
 
     if (isLastQuestion) {
-      console.log("Last question rendered, sending request...");
-      postAnswers(answeredQuestions);
+      console.log("Last question rendered, sending request...", { submitted });
+      if (submitted) return;
+      try {
+        const submittedSuccessfully = postAnswers(answeredQuestions);
+        if (submittedSuccessfully) setSubmitted(true);
+      } catch (err) {
+        console.error(`"failed", ${err.message}`);
+      }
     }
-  }, [questionNumber, totalQuestions, answeredQuestions]);
+  }, [
+    questionNumber,
+    totalQuestions,
+    answeredQuestions,
+    submitted,
+    setSubmitted,
+  ]);
 
   function getCurrentQuestion() {
     const id =

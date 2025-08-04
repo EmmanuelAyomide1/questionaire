@@ -6,6 +6,8 @@ import Question, {
 } from "./features/questions/Question";
 import Home from "./ui/Home";
 import Loader from "./ui/Loader";
+import NotFound from "./ui/NotFound";
+import Error from "./ui/Error";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +19,11 @@ const router = createBrowserRouter([
     Component: Question,
     loader: questionLoader,
     hydrateFallbackElement: <Loader />,
+    errorElement: <Error />,
+  },
+  {
+    path: "*",
+    Component: NotFound,
   },
 ]);
 

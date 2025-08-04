@@ -31,6 +31,6 @@ export async function postAnswers(answeredQuestions) {
 
   if (!res.ok) throw Error("Failed getting questions");
 
-  const data = await res.json();
-  return data;
+  await res.json();
+  return true;
 }

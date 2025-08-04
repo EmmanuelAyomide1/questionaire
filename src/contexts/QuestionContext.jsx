@@ -13,6 +13,7 @@ function QuestionProvider({ children }) {
       questionId: "",
       questionNumber: 0,
     });
+  const [submitted, setSubmitted] = useLocalStorage("hasSubmitted", false);
   const [answer, setAnswer] = useState("");
 
   useEffect(() => {
@@ -56,6 +57,8 @@ function QuestionProvider({ children }) {
         questionId,
         questionNumber,
         sectionNumber,
+        submitted,
+        setSubmitted,
         handleSubmitAnswer,
         setAnswer,
       }}
