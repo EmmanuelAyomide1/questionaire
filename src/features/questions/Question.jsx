@@ -22,12 +22,16 @@ function Question() {
     submitted,
     setAnswer,
     setSubmitted,
+    buttonDisabled,
   } = useQuestionContext();
 
   const section = sections[sectionNumber];
   const questions = section.questions;
   const curQuestion = getCurrentQuestion();
-  const buttonDisabled = answer === undefined ? 1 : 0;
+  const disableNext =
+    curQuestion.type === "interstitial" || curQuestion.type === "number"
+      ? false
+      : buttonDisabled;
 
   useEffect(() => {
     const isLastQuestion = questionNumber === totalQuestions - 1;
@@ -115,10 +119,12 @@ function Question() {
             ? questionNumber
             : totalQuestions
         }
+        disableNext={disableNext}
+        onClickNext={() => handleNext()}
         onClick={() => handlePrevious()}
       />
 
-      <div className="mt-18 flex h-full flex-col items-center space-y-14 px-4">
+      <div className="mt-10 flex h-full flex-col items-center space-y-5 px-4">
         <h1 className="text-center font-[inter] text-2xl font-semibold">
           {section?.meta?.title}
         </h1>
@@ -155,12 +161,7 @@ function Question() {
               <Button
                 onClick={handleNext}
                 type="primary"
-                disabled={
-                  curQuestion.type === "interstitial" ||
-                  curQuestion.type === "number"
-                    ? false
-                    : buttonDisabled
-                }
+                disabled={disableNext}
               >
                 Next
               </Button>

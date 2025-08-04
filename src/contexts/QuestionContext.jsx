@@ -15,6 +15,7 @@ function QuestionProvider({ children }) {
     });
   const [submitted, setSubmitted] = useLocalStorage("hasSubmitted", false);
   const [answer, setAnswer] = useState("");
+  const buttonDisabled = answer === undefined ? 1 : 0;
 
   useEffect(() => {
     function getStoredAnswer() {
@@ -59,6 +60,7 @@ function QuestionProvider({ children }) {
         sectionNumber,
         submitted,
         setSubmitted,
+        buttonDisabled,
         handleSubmitAnswer,
         setAnswer,
       }}
