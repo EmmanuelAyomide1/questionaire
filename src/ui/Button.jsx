@@ -1,4 +1,5 @@
-import { Link } from "react-router";
+import { NavLink } from "react-router";
+import Loader from "./Loader";
 
 function Button({ children, type = "primary", to, onClick, disabled = false }) {
   const disableStyle = "opacity-60";
@@ -14,9 +15,14 @@ function Button({ children, type = "primary", to, onClick, disabled = false }) {
       </button>
     );
   return (
-    <Link className={style[type]} to={to}>
-      {children}
-    </Link>
+    <NavLink className={style[type]} to={to}>
+      {/* {children} */}
+      {({ isPending }) => (
+        <span>
+          {children} {isPending && <Loader />}
+        </span>
+      )}
+    </NavLink>
   );
 }
 
