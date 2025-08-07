@@ -67,7 +67,7 @@ function SlidingOptions({ min, max }) {
   }
   return (
     <div
-      className="mt-2 h-71 w-full overflow-y-scroll pb-17"
+      className="mt-2 h-71 w-full overflow-y-auto pb-17"
       ref={optionContainerRef}
       onScroll={updateVisibleItems}
       key={questionId}

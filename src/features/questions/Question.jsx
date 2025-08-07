@@ -130,7 +130,7 @@ function Question() {
         </h1>
 
         <div className="flex h-full w-full flex-col justify-between">
-          <div className="max-h-110 min-h-55 space-y-7 overflow-y-scroll px-2 font-medium">
+          <div className="max-h-110 min-h-55 space-y-7 overflow-y-auto px-2 font-medium">
             {!(curQuestion?.type === "interstitial") && (
               <p className="text-justify">{section.meta.instructions}</p>
             )}
